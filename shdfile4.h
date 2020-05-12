@@ -58,7 +58,7 @@ typedef struct _SHADOWFILE_4
     DWORD TotalSizeHigh;
     DWORD NamedPropertiesSize;
     LPWSTR NamedProperties;
-} SHADOWFILE_4, PSHADOWFILE_4;
+} SHADOWFILE_4, *PSHADOWFILE_4;
 #ifdef _M_AMD64
 C_ASSERT(sizeof(SHADOWFILE_4) == 0xE0);
 #endif
