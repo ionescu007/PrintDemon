@@ -16,6 +16,7 @@ Environment:
     User Mode
 
 Revision History:
+
     Added definition for Windows 10 Shadow Files - ionescu007 - 12 May 20
 
 --*/
