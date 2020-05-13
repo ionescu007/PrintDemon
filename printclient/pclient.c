@@ -13,7 +13,7 @@ main(
     HANDLE hPrinter;
     PJOB_INFO_4 jobInfo;
     DWORD dwNeeded, dwReturned;
-    PPRINTER_INFO_4 printerInfo;
+    PPRINTER_INFO_4 printerInfo, currentInfo;
     PPRINTER_INFO_2 printerFullInfo;
     LPWSTR printerName;
     WCHAR jobName[64];
@@ -67,12 +67,13 @@ main(
     // Enumerate all the printers
     //
     printerName = NULL;
+    currentInfo = printerInfo;
     while (dwReturned--)
     {
         //
         // Check for attributes that indicate ours
         //
-        if ((printerInfo->Attributes & (PRINTER_ATTRIBUTE_HIDDEN |
+        if ((currentInfo->Attributes & (PRINTER_ATTRIBUTE_HIDDEN |
                                         PRINTER_ATTRIBUTE_RAW_ONLY |
                                         PRINTER_ATTRIBUTE_LOCAL)) ==
                                        (PRINTER_ATTRIBUTE_HIDDEN |
@@ -83,11 +84,11 @@ main(
             // We found it!
             //
             printf("[+] Found IPC Printer: %S (status = %lx)\n",
-                    printerInfo->pPrinterName, printerInfo->Attributes);
-            printerName = printerInfo->pPrinterName;
+                    currentInfo->pPrinterName, currentInfo->Attributes);
+            printerName = currentInfo->pPrinterName;
             break;
         }
-        printerInfo++;
+        currentInfo++;
     }
 
     //
